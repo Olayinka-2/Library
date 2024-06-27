@@ -1,7 +1,10 @@
+
+let authorName = document.querySelector("#author-name");
+let bookTitle = document.querySelector("#book-title");
+let bookPage = document.querySelector("#book-page");
+let submitBtn = document.querySelector("#submit");
+let table = document.getElementsByTagName("table");
 let tableBody = document.querySelector("tbody");
-
-
-
 
 
 const myLibrary = [
@@ -17,12 +20,17 @@ function Book(author, title, numberOfPage) {
    this.pages = numberOfPage
 }
 
-function addBookToLibrary() {
-   myLibrary.push(new Book("Robert Kiyosaki", "Rich Dad Poor Dad", "295 Pages"));
+function addBookToLibrary(title, author, pages) {
+   if(title == "" || author == "" || pages == "") {
+      return;
+   }
+   myLibrary.push(new Book(author, title, pages));
+   return;
 }
 
+
+
 function joinNodes() {
-   addBookToLibrary();
    for(let i = 0; i < myLibrary.length; i++) {
       const trForSN = document.createElement("td");
       const trForTitle = document.createElement("td");
@@ -49,7 +57,19 @@ function joinNodes() {
 }
 
 function displayBook() {
+
    joinNodes();
 }
 
-displayBook();
+submitBtn.addEventListener("click", event => {
+   // event.preventDefault(); 
+   tableBody.innerHTML = "";
+   addBookToLibrary(authorName.value, bookTitle.value, bookPage.value);
+   displayBook();
+   
+   authorName.value = '';
+   bookTitle.value = '';
+   bookPage.value = '';
+});
+
+window.addEventListener('load', displayBook);

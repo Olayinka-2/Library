@@ -34,27 +34,28 @@
                   <div class="inner-form-section">
                      <div>
                         <label for="author-name">Name of Book  </label>
-                        <input type="text" name="author-name" id="author-name">
+                        <input type="text" required name="author-name" id="author-name">
                      </div>
                      <div>
                         <label for="book-title">Title of Book  </label>
-                        <input type="text" name="book-title" id="book-title">
+                        <input type="text" required name="book-title" id="book-title">
                      </div>
                      <div>
-                        <label for="number-of-page">Name of Book  </label>
-                        <input type="text" name="number-of-page" id="number-of-page">
+                        <label for="book-page">Number of pages  </label>
+                        <input type="number" required name="book-page" id="book-page">
                      </div>
-                     <div>
-                        <label for="book-name">Name of Book  </label>
-                        <input type="text" name="book-name" id="book-name">
-                     </div>
-                     <div class="radio-section">
+                     <div class="radio-div">
                         <label for="radio">Have you read it? </label>
-                        <input type="radio" name="book-read" id="radio">
+                        <div>
+                        <label>Yes</label>
+                           <input type="radio" name="book-read" id="radio">
+                           <Label>No</Label>
+                           <input type="radio" name="book-read" id="radio">
+                        </div>
                      </div>
                      <div class="buttons">
                         <button type="reset">Clear</button>
-                        <button type="submit">Submit</button>
+                        <button type="submit" id="submit">Submit</button>
                      </div>
                   </div>
                </form>

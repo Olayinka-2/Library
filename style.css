@@ -19,8 +19,10 @@ header {
 
 .container {
    display: flex;
-   flex-direction: column;
-   align-items: center;
+   flex-direction: row;
+   align-items: flex-start;
+   column-gap: 2rem;
+   justify-content: center;
 }
 
 table, th, td {
@@ -39,10 +41,11 @@ th, td {
 }
 
 .form-container h2 {
+   margin: 2rem 0;
    font-size: 2.5rem;
 }
 
-.form-container label, .form-container input {
+.form-container label {
    font-size: 1.6rem;
 }
 
@@ -50,4 +53,21 @@ th, td {
    display: flex;
    flex-direction: column;
    row-gap: 2rem;
+}
+
+.inner-form-section > div {
+   display: flex;
+   flex-direction: column;
+   width: 25rem;
+   align-items: flex-start;
+}
+
+.inner-form-section input {
+   outline: none;
+   border: none;
+   padding: .5rem;
+   /* border-radius: .5rem; */
+   border-bottom: 1px solid #333333;
+   font-size: 1.2rem;
+   background: none;
 }
