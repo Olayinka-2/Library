@@ -1,70 +1,65 @@
-
 let authorName = document.querySelector("#author-name");
 let bookTitle = document.querySelector("#book-title");
 let bookPage = document.querySelector("#book-page");
 let submitBtn = document.querySelector("#submit");
-let table = document.getElementsByTagName("table");
+let table = document.getElementsByTagName("table")[0];
 let tableBody = document.querySelector("tbody");
 
-
 const myLibrary = [
-   {title:"Eat that frog", author:"Brian Tracy", pages:"220"},
-   {title:"Spiritual Growth", author:"Chris Onayinka", pages:"20"},
-   
+   { title: "Eat that frog", author: "Brian Tracy", pages: "220" },
+   { title: "Spiritual Growth", author: "Chris Onayinka", pages: "20" },
 ];
 
-
 function Book(author, title, numberOfPage) {
-   this.author = author,
-   this.title = title,
-   this.pages = numberOfPage
+   this.author = author;
+   this.title = title;
+   this.pages = numberOfPage;
 }
 
 function addBookToLibrary(title, author, pages) {
-   if(title == "" || author == "" || pages == "") {
+   if (title === "" || author === "" || pages === "") {
       return;
    }
    myLibrary.push(new Book(author, title, pages));
-   return;
 }
 
-
-
 function joinNodes() {
-   for(let i = 0; i < myLibrary.length; i++) {
+   tableBody.innerHTML = ''; // Clear existing rows
+
+   myLibrary.forEach((book, index) => {
       const trForSN = document.createElement("td");
       const trForTitle = document.createElement("td");
       const trForPage = document.createElement("td");
       const trForAuthor = document.createElement("td");
       const tableRow = document.createElement("tr");
-      trForSN.textContent = i + 1;
-      for(let props in myLibrary[i]) {
-         switch(props){
+
+      trForSN.textContent = index + 1;
+
+      for (let prop in book) {
+         switch (prop) {
             case "title":
-               trForTitle.textContent = myLibrary[i][props];
+               trForTitle.textContent = book[prop];
                break;
             case "author":
-               trForAuthor.textContent = myLibrary[i][props];
+               trForAuthor.textContent = book[prop];
                break;
             case "pages":
-               trForPage.textContent = myLibrary[i][props];
+               trForPage.textContent = book[prop];
                break;
          }
       }
-      tableRow.append(trForSN,trForAuthor,trForTitle, trForPage);
+      tableRow.append(trForSN, trForAuthor, trForTitle, trForPage);
       tableBody.append(tableRow);
-   }
+   });
 }
 
 function displayBook() {
-
    joinNodes();
 }
 
 submitBtn.addEventListener("click", event => {
-   // event.preventDefault(); 
-   tableBody.innerHTML = "";
-   addBookToLibrary(authorName.value, bookTitle.value, bookPage.value);
+   event.preventDefault(); // Prevent form submission
+   addBookToLibrary(bookTitle.value, authorName.value, bookPage.value);
    displayBook();
    
    authorName.value = '';
