@@ -1,54 +1,77 @@
-let authorName = document.querySelector("#author-name");
-let bookTitle = document.querySelector("#book-title");
-let bookPage = document.querySelector("#book-page");
-let submitBtn = document.querySelector("#submit");
-let table = document.getElementsByTagName("table")[0];
-let tableBody = document.querySelector("tbody");
+const authorNameInput = document.querySelector("#author-name");
+const bookTitleInput = document.querySelector("#book-title");
+const bookPageInput = document.querySelector("#book-page");
+const submitBtn = document.querySelector("#submit");
+const table = document.querySelector("table");
+const tableBody = document.querySelector("tbody");
+const form = document.querySelector("form");
+const formSection = document.querySelector(".form-section")
+const closeButton = document.querySelector("#closeButton");
+const addBtn = document.querySelector(".addBtn");
+
+closeButton.addEventListener("click", event => {
+   formSection.style.display = "none";
+});
+addBtn.addEventListener("click", event => {
+   formSection.style.display = "flex";
+});
+
 
 const myLibrary = [
-   { title: "Eat that frog", author: "Brian Tracy", pages: "220" },
-   { title: "Spiritual Growth", author: "Chris Onayinka", pages: "20" },
+   { title: "Eat that frog", author: "Brian Tracy", pages: "220", read: "Yes" },
+   { title: "Spiritual Growth", author: "Chris Onayinka", pages: "20",read: "Yes" },
 ];
 
-function Book(author, title, numberOfPage) {
+function Book(author, title, numberOfPage, read) {
    this.author = author;
    this.title = title;
    this.pages = numberOfPage;
+   this.read = read;
 }
 
-function addBookToLibrary(title, author, pages) {
+function addBookToLibrary(title, author, pages, read) {
    if (title === "" || author === "" || pages === "") {
       return;
    }
-   myLibrary.push(new Book(author, title, pages));
+   myLibrary.push(new Book(author, title, pages, read));
 }
 
 function joinNodes() {
    tableBody.innerHTML = ''; // Clear existing rows
 
    myLibrary.forEach((book, index) => {
-      const trForSN = document.createElement("td");
-      const trForTitle = document.createElement("td");
-      const trForPage = document.createElement("td");
-      const trForAuthor = document.createElement("td");
+      const tdForSN = document.createElement("td");
+      const tdForTitle = document.createElement("td");
+      const tdForPage = document.createElement("td");
+      const tdForAuthor = document.createElement("td");
+      const tdForRead = document.createElement("td");
       const tableRow = document.createElement("tr");
+      const tdForButton = document.createElement("td");
+      const button = document.createElement("button");
 
-      trForSN.textContent = index + 1;
+      tdForSN.textContent = index + 1;
+
+      button.dataset.btnId = index;
+      button.textContent = "Delete Book"
+
+      tdForButton.append(button);
 
       for (let prop in book) {
          switch (prop) {
             case "title":
-               trForTitle.textContent = book[prop];
+               tdForTitle.textContent = book[prop];
                break;
             case "author":
-               trForAuthor.textContent = book[prop];
+               tdForAuthor.textContent = book[prop];
                break;
             case "pages":
-               trForPage.textContent = book[prop];
+               tdForPage.textContent = book[prop];
                break;
+            case "read":
+               tdForRead.textContent = book[prop];
          }
       }
-      tableRow.append(trForSN, trForAuthor, trForTitle, trForPage);
+      tableRow.append(tdForSN, tdForAuthor, tdForTitle, tdForPage, tdForRead, tdForButton);
       tableBody.append(tableRow);
    });
 }
@@ -59,12 +82,23 @@ function displayBook() {
 
 submitBtn.addEventListener("click", event => {
    event.preventDefault(); // Prevent form submission
-   addBookToLibrary(bookTitle.value, authorName.value, bookPage.value);
+
+   const readValueInput = document.querySelector('input[name="book-read"]:checked');
+   if(readValueInput) {
+      addBookToLibrary(bookTitleInput.value, authorNameInput.value, bookPageInput.value, readValueInput.value);
+   }
+   
    displayBook();
    
-   authorName.value = '';
-   bookTitle.value = '';
-   bookPage.value = '';
+   form.reset();
 });
 
 window.addEventListener('load', displayBook);
+
+tableBody.addEventListener('click', event => {
+   if (event.target && event.target.matches('button[data-btn-id]')) {
+      const btnId = event.target.dataset.btnId;
+      myLibrary.splice(btnId, 1);
+      displayBook();
+   }
+});

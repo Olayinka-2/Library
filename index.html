@@ -15,11 +15,13 @@
       <div class="container">
          <div class="table-container">
             <table>
+               <button class="addBtn">Add new book</button>
                <thead>
                   <th>S/N</th>
                   <th>Name of Author</th>
                   <th>Title of the book</th>
                   <th>Number of pages</th>
+                  <th>Have you read it?</th>
                </thead>
                <tbody>
    
@@ -27,40 +29,49 @@
             </table>
          </div>
 
-         <div class="form-section">
-            <div class="form-container">
-               <form action="/">
-                  <h2>Enter new Book</h2>
-                  <div class="inner-form-section">
-                     <div>
-                        <label for="author-name">Name of Book  </label>
-                        <input type="text" required name="author-name" id="author-name">
-                     </div>
-                     <div>
-                        <label for="book-title">Title of Book  </label>
-                        <input type="text" required name="book-title" id="book-title">
-                     </div>
-                     <div>
-                        <label for="book-page">Number of pages  </label>
-                        <input type="number" required name="book-page" id="book-page">
-                     </div>
-                     <div class="radio-div">
-                        <label for="radio">Have you read it? </label>
-                        <div>
-                        <label>Yes</label>
-                           <input type="radio" name="book-read" id="radio">
-                           <Label>No</Label>
-                           <input type="radio" name="book-read" id="radio">
+               <div class="form-section">
+                  <div class="form-container">
+                     <form action="/">
+                           <h2>Enter new Book</h2>
+                        <div class="inner-form-section">
+                           <div>
+                              <label for="author-name">Name of Author  </label>
+                              <input type="text" required name="author-name" id="author-name">
+                           </div>
+                           <div>
+                              <label for="book-title">Title of Book  </label>
+                              <input type="text" required name="book-title" id="book-title">
+                           </div>
+                           <div>
+                              <label for="book-page">Number of pages  </label>
+                              <input type="number" required name="book-page" id="book-page">
+                           </div>
+                           <div class="radio-div">
+                              <label for="radio">Have you read it? </label>
+                              <div>
+                                 <label>
+                                    <input type="radio" name="book-read" value="Yes">
+                                    <div class="custom-radio"></div>
+                                    Yes
+                                </label>
+                                <label>
+                                    <input type="radio" name="book-read" value="No">
+                                    <div class="custom-radio"></div>
+                                    No
+                                </label>
+                              </div>
+                           </div>
+                           <div class="resetBtn">
+                              <button type="reset">Clear</button>
+                              <button type="submit" id="submit">Submit</button>
+                           </div>
                         </div>
-                     </div>
-                     <div class="buttons">
-                        <button type="reset">Clear</button>
-                        <button type="submit" id="submit">Submit</button>
-                     </div>
+                     </form>
+                    
                   </div>
-               </form>
-            </div>
-         </div>
+                  <button id="closeButton">Close book</button>
+               </div>
+         
       </div>
    </main>
 </body>
