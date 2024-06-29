@@ -5,7 +5,7 @@ const submitBtn = document.querySelector("#submit");
 const table = document.querySelector("table");
 const tableBody = document.querySelector("tbody");
 const form = document.querySelector("form");
-const formSection = document.querySelector(".form-section")
+const formSection = document.querySelector(".form-section");
 const closeButton = document.querySelector("#closeButton");
 const addBtn = document.querySelector(".addBtn");
 
@@ -16,10 +16,9 @@ addBtn.addEventListener("click", event => {
    formSection.style.display = "flex";
 });
 
-
 const myLibrary = [
    { title: "Eat that frog", author: "Brian Tracy", pages: "220", read: "Yes" },
-   { title: "Spiritual Growth", author: "Chris Onayinka", pages: "20",read: "Yes" },
+   { title: "Spiritual Growth", author: "Chris Onayinka", pages: "20", read: "Yes" },
 ];
 
 function Book(author, title, numberOfPage, read) {
@@ -47,14 +46,36 @@ function joinNodes() {
       const tdForRead = document.createElement("td");
       const tableRow = document.createElement("tr");
       const tdForButton = document.createElement("td");
-      const button = document.createElement("button");
+      const buttonForDeleteBook = document.createElement("button");
+      const tdForReadComplete = document.createElement("td");
+
+      tdForRead.dataset.index = index;
+
+      // Create the elements
+      const label = document.createElement("label");
+      label.className = "switch";
+   
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.className = "toggleSwitch";
+      input.dataset.index = index;
+   
+      const span = document.createElement("span");
+      span.className = "slider round";
+   
+      // Append the elements
+      label.appendChild(input);
+      label.appendChild(span);
+   
+      // Append the label to the container div
+      tdForReadComplete.appendChild(label);
 
       tdForSN.textContent = index + 1;
 
-      button.dataset.btnId = index;
-      button.textContent = "Delete Book"
+      buttonForDeleteBook.dataset.btnId = index;
+      buttonForDeleteBook.textContent = "Delete Book";
 
-      tdForButton.append(button);
+      tdForButton.append(buttonForDeleteBook);
 
       for (let prop in book) {
          switch (prop) {
@@ -71,7 +92,13 @@ function joinNodes() {
                tdForRead.textContent = book[prop];
          }
       }
-      tableRow.append(tdForSN, tdForAuthor, tdForTitle, tdForPage, tdForRead, tdForButton);
+      
+      if (tdForRead.textContent == "Yes") {
+         input.checked = true;
+      } else if (tdForRead.textContent == "No") {
+         input.checked = false;
+      }
+      tableRow.append(tdForSN, tdForAuthor, tdForTitle, tdForPage, tdForRead, tdForReadComplete, tdForButton);
       tableBody.append(tableRow);
    });
 }
@@ -81,10 +108,10 @@ function displayBook() {
 }
 
 submitBtn.addEventListener("click", event => {
-   event.preventDefault(); // Prevent form submission
+   event.preventDefault(); 
 
    const readValueInput = document.querySelector('input[name="book-read"]:checked');
-   if(readValueInput) {
+   if (readValueInput) {
       addBookToLibrary(bookTitleInput.value, authorNameInput.value, bookPageInput.value, readValueInput.value);
    }
    
@@ -100,5 +127,14 @@ tableBody.addEventListener('click', event => {
       const btnId = event.target.dataset.btnId;
       myLibrary.splice(btnId, 1);
       displayBook();
+   }
+});
+
+tableBody.addEventListener('change', event => {
+   if (event.target && event.target.matches("input.toggleSwitch")) {
+      const index = event.target.dataset.index;
+      const tdForRead = tableBody.querySelector(`td[data-index="${index}"]`);
+      myLibrary[index].read = event.target.checked ? "Yes" : "No";
+      tdForRead.textContent = myLibrary[index].read;
    }
 });
