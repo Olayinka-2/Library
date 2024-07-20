@@ -67,8 +67,8 @@ th, td {
 tbody button {
    color: white;
    background: #333333;
+   border: 1px solid #333;
    padding: 1rem;
-   border: none;
    border-radius: .5rem;
    font-weight: bold;
 }
