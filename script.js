@@ -26,12 +26,15 @@ const myLibrary = [
    { title: "Spiritual Growth", author: "Chris Onayinka", pages: "20", read: "Yes" },
 ];
 
-// Book constructor function
-function Book(author, title, numberOfPage, read) {
-   this.author = author;
-   this.title = title;
-   this.pages = numberOfPage;
-   this.read = read;
+// Book class 
+
+class Book {
+   constructor(author, title, numberOfPage, read) {
+      this.author = author;
+      this.title = title;
+      this.numberOfPage = numberOfPage;
+      this.read = read;
+   }
 }
 
 // Function to add a new book to the library
