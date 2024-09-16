@@ -10,6 +10,8 @@ const formSection = document.querySelector(".form-section");
 const closeButton = document.querySelector("#closeButton");
 const addBtn = document.querySelector(".addBtn");
 
+const submitError = document.querySelector('#submit-error')
+
 // Event listener for closing the form section
 closeButton.addEventListener("click", event => {
    formSection.style.display = "none"; // Hide the form section on close button click
@@ -125,6 +127,10 @@ function displayBook() {
 submitBtn.addEventListener("click", event => {
    event.preventDefault(); // Prevent form submission from reloading the page
 
+   if(!validatePage()) {
+      return;
+   }
+
    // Get the selected read value from the form
    const readValueInput = document.querySelector('input[name="book-read"]:checked');
    if (readValueInput) {
@@ -158,3 +164,11 @@ tableBody.addEventListener('change', event => {
 
 // Display all books when the page initially loads
 window.addEventListener('load', displayBook);
+
+function validatePage() {
+   if(authorNameInput.value.length == 0 || bookPageInput.value.length == 0 || bookPageInput.value.length == 0) {
+      submitError.innerHTML = 'fill in all the parameters to proceed';
+      return false;
+   }
+   return true
+}

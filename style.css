@@ -84,6 +84,7 @@ tbody button:hover, .addBtn:active {
    color: #fff;
    padding: 3rem;
    width: 300px;
+   position: relative;
 }
 
 .form-container h2 {
@@ -186,4 +187,12 @@ tbody button:hover, .addBtn:active {
    background-color: #fff;
    color: #333;
    border: 1px solid #333;
+}
+
+#submit-error {
+   color: red;
+   font-size: 1.2rem;
+   display: block;
+   position: absolute;
+   bottom: 10px;
 }
