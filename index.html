@@ -5,39 +5,61 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Library</title>
    <link rel="stylesheet" href="style.css">
-   <script src="./dist/script.js" defer></script>
+   <script src="./jdist/script.js" defer></script>
 </head>
 <body>
-   <template id="project-input">
-      <form action="#" class="input-form">
-         <h2>Add New Book</h2>
+   <div class="container">
+         <form action="#" class="input-form">
+         <h3>Add New Book</h3>
          <div class="form-container">
             <div class="form-control">
                <label for="Title">Title:</label>
-               <input type="text" id="Title" required>
+               <input type="text" id="Title" name="Title" required>
             </div>
             <div class="form-control">
                <label for="Author">Author:</label>
-               <input type="text" id="Author" required>
+               <input type="text" id="Author" name="Author" required>
             </div>
-            <div class="form-contol">
+            <div class="form-control">
                <label for="genre">Genre</label>
-               <select name="genre" id="genre">
-                  <option value="Fiction">Fiction/option>
+               <select name="genre" id="genre" required>
+                  <option value="Fiction" selected>Fiction</option>
+                  <option value="Romance">Romance</option>
+                  <option value="Dystopian">Dystopian</option>
+                  <option value="Adventure">Adventure</option>
+                  <option value="Fantasy">Fantasy</option>
                </select>
             </div>
             <div class="form-control">
-               <label for="Pages">Number of Pages:</label>
-               <input type="number" id="Pages" required>
+               <label for="Pages">Pages:</label>
+               <input type="number" id="Pages" name="pages" required>
+            </div>
+            <div class="form-control">
+               <button type="submit">+Add Book</button>
             </div>
          </div>
-      </form>
+         </form>
+         <div class="book-preview">
+         <h2>Book Display</h2>
+         <div class="book-container">
+            <div class="book-image">
+               <img src="" alt="">
+            </div>
+            <div class="book-info">
+               <h3>Name</h3>
+            </div>
+         </div>
+      </div>
+   </div>
 
-   </template>
-   <header>
+
+   <div class="app">
+      
+   </div>
+   <!-- <header>
       <h1>Luminex Library</h1>
-   </header>
-   <main>
+   </header> -->
+   <!-- <main>
       <div class="container">
          <div class="table-container">
             <table>
@@ -57,7 +79,7 @@
             </table>
          </div>
 
-               <div class="form-section">
+         <div class="form-section">
                   <div class="form-container">
                      <form action="/" novalidate>
                            <h2>Enter new Book</h2>
@@ -99,9 +121,9 @@
                     
                   </div>
                   <button id="closeButton">Close book</button>
-               </div>
+         </div>
          
       </div>
-   </main>
+   </main> -->
 </body>
 </html>

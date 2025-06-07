@@ -1,198 +1,66 @@
-* {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-}
-
 html {
-   font-size: 62.5%;
+  font-size: 62.5%;
+  line-height: 1.6;
 }
 
 body {
-   position: relative;
-}
-
-header {
-   background: #333333;
-   color: #fff;
-   text-align: center;
-   padding: 1rem;
-   font-size: 2.5rem;
-   margin-bottom: 2rem;
-}
-
-
-.form-section {
-   position: absolute;
-   top: 0;
-   left: 0;
-   background-color: #fff;
-   width: 100%;
-   display: none;
-   justify-content: center;
-   align-items: center;
-   height: 100svh;
+  font-size: 1.6rem;
+  background-color: #fffbf5;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
-   display: flex;
-   flex-direction: row;
-   align-items: flex-start;
-   column-gap: 2rem;
-   justify-content: center;
+  margin: 3rem;
+  max-width: 700px;
+  padding: 3.5rem;
+  border: 1px solid #ccc;
+  border-radius: .8rem;
 }
 
-table, th, td {
-   border: 1px solid #333333;
-   border-collapse: collapse;
-   font-size: 1.6rem
-}
-
-th, td {
-   padding: 1rem 1.5rem;
-}
-
-.addBtn {
-   margin: 0 auto 3rem;
-   display: block;
-   color: white;
-   background: #333333;
-   padding: 1rem;
-   border: none;
-   border-radius: .5rem;
-   font-weight: bold;
-   cursor: pointer;
-}
-
-tbody button {
-   color: white;
-   background: #333333;
-   border: 1px solid #333;
-   padding: 1rem;
-   border-radius: .5rem;
-   font-weight: bold;
-}
-
-tbody button:hover, .addBtn:active {
-   background: #fff;
-   color: #333333;
-   border: 1px solid #333333;
+.input-form h3 {
+  font-weight: 500;
 }
 
 .form-container {
-   background-color: #333333;
-   color: #fff;
-   padding: 3rem;
-   width: 300px;
-   position: relative;
+  border: 1px solid #ccc;
+  border-radius: .6rem;
+  padding: 2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-.form-container h2 {
-   margin: 2rem 0;
-   font-size: 2.5rem;
+.form-container .form-control {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  gap: 0.5rem;
 }
 
-.form-container label {
-   font-size: 1.6rem;
+.form-control input:focus-within,
+.form-control select:focus-within {
+  border: 1px solid #007bff;
+  outline: none;
 }
 
-.inner-form-section {
-   display: flex;
-   flex-direction: column;
-   row-gap: 2rem;
+.form-control label {
+  font-weight: 500;
+  color: #333;
 }
 
-.inner-form-section > div:not(.resetBtn) {
-   display: flex;
-   flex-direction: column;
-   width: 25rem;
-   align-items: flex-start;
+.form-control input,
+.form-control select{
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: .4rem;
 }
 
-.inner-form-section input {
-   outline: none;
-   border: none;
-   padding: .5rem;
-   border-bottom: 1px solid #fff;
-   font-size: 1.2rem;
-   background: none;
-   color: #fff;
-}
-
-.inner-form-section input[type="radio"] {
-   color: #333;
-   display: none;
-}
-
-.custom-radio {
-   display: inline-block;
-   width: 20px;
-   height: 20px;
-   border-radius: 50%;
-   border: 2px solid #ccc;
-   position: relative;
-   cursor: pointer;
-}
-
-.inner-form-section input[type="radio"]:checked + .custom-radio::after {
-   content: ' ';
-   display: block;
-   width: 12px;
-   height: 12px;
-   border-radius: 50%;
-   background: #fff;
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-}
-
-.inner-form-section input:focus {
-   background: transparent;
-}
-
-.radio-div > label {
-   margin-bottom: 1rem;
-}
-
-
-.resetBtn {
-   display: flex;
-   flex-direction: row;
-   column-gap: 1rem;
-   justify-content: center;
-}
-
-.resetBtn button, #closeButton {
-   display: block;
-   color: #333333;
-   background: #fff;
-   padding: .6rem 2rem;
-   border: none;
-   border-radius: .5rem;
-   font-weight: bold;
-}
-
-#closeButton {
-   display: block;
-   position: absolute;
-   color: #fff;
-   background: #333;
-   top: 1rem;
-   right: 1rem;
-   cursor: pointer;
-}
-
-#closeButton:active {
-   background-color: #fff;
-   color: #333;
-   border: 1px solid #333;
-}
-
-#submit-error {
-   color: red;
-   font-size: 1.2rem;
-   display: block;
-   position: absolute;
-   bottom: 10px;
+.form-control button {
+  padding: 1rem 1rem;
+  background-color: #3370c5;
+  color: #fff;
+  border: none;
+  border-radius: .4rem;
+  cursor: pointer;
 }
