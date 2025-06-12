@@ -3,15 +3,22 @@ html {
   line-height: 1.6;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-size: 1.6rem;
   background-color: #fffbf5;
   font-family: Arial, Helvetica, sans-serif;
+  padding: 3rem;
 }
 
 .container {
-  margin: 3rem;
-  max-width: 700px;
+  margin: 3rem auto;
+  max-width: 72rem;
   padding: 3.5rem;
   border: 1px solid #ccc;
   border-radius: .8rem;
@@ -182,3 +189,66 @@ body {
   } 
   
 }
+
+/* Library styles */
+
+.Library-container {
+  max-width: 72rem;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.library-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #283545;
+  gap: 1rem;
+}
+
+.library-heading i {
+  font-size: 4rem;
+}
+
+.search-bar {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+.search-bar input {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-radius: 0 .4rem .4rem 0;
+  width: 100%;
+  font-size: 1.6rem;
+}
+
+.search-bar i {
+  border-radius: .4rem 0 0 .4rem;
+  position: relative;
+  padding: .8rem;
+  border: 1px solid #ccc;
+  font-size: 1.8rem;
+  font-weight: bold;
+  border-right: none;
+}
+
+.search-bar:focus-within input, .search-bar:focus-within i {
+  border: 1px solid #007bff;
+  outline: none;
+}  
+
+.search-bar:focus-within input {
+  border-left: none;
+}
+
+.search-bar:focus-within i {
+  border-right: none;
+}
+
