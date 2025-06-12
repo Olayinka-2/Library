@@ -252,3 +252,48 @@ body {
   border-right: none;
 }
 
+/* Library book preview styles */
+
+.books-container {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+
+}
+
+table,th, td {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  text-align: left;
+  font-size: 1.4rem;
+  border-radius: 80rem;
+}
+
+.book-name-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .5rem;
+}
+
+.book-name-item i {
+  color: #283545;
+  margin-right: .5rem;
+}
+
+.book-name-item span {
+  font-weight: bold;
+} 
+
+tr td:last-of-type span {
+  font-weight: bold;
+  color: #01631D;
+  padding: .8rem;
+  background-color: #E8F6ED;
+  border-radius: 1rem;
+}
+
