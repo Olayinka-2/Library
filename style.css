@@ -16,12 +16,13 @@ body {
   padding: 3rem;
 }
 
-.container {
+.template-container {
   margin: 3rem auto;
   max-width: 72rem;
   padding: 3.5rem;
   border: 1px solid #ccc;
   border-radius: .8rem;
+  background-color: #fff;
 }
 
 .input-form h3, .book-preview-container h3{
@@ -43,6 +44,10 @@ body {
   flex-direction: column;
   width: 95%;
   gap: 0.5rem;
+}
+
+form {
+  margin-bottom: 4rem;
 }
 
 .form-control input:focus-within,
@@ -213,13 +218,39 @@ body {
   font-size: 4rem;
 }
 
+.library-menu {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .search-bar {
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
+  flex-basis: 70%;
 }
+
+.addBtn button {
+  height: 100%;
+  background-color: #6ac29c;
+  color: #fff;
+  border: none;
+  border-radius: .4rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+  width: 10rem;
+}
+
+.addBtn button:hover {
+  border: 1px solid #6ac29c;
+  background-color: #fff;
+  color: #6ac29c;
+  font-weight: bold;
+}
+
 .search-bar input {
   padding: 0.8rem;
   border: 1px solid #ccc;
@@ -297,3 +328,16 @@ tr td:last-of-type span {
   border-radius: 1rem;
 }
 
+/* Modal display */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
