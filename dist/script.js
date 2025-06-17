@@ -52,7 +52,8 @@ class BookPreview extends TemplateDisplay {
         };
         this.setpInputListeners();
         this.getElement("form", this.templateContainer).addEventListener('submit', (event) => {
-            if (!this.templateContainer.querySelector("form").checkValidity()) {
+            const form = this.templateContainer.querySelector("form");
+            if (!form.checkValidity()) {
                 return;
             }
             event.preventDefault();
@@ -60,6 +61,7 @@ class BookPreview extends TemplateDisplay {
             const bookList = new BookList(this);
             bookList.showBookList();
             this.Books.push(bookList.BookData);
+            form.reset();
         });
     }
     setpInputListeners() {
