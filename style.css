@@ -175,6 +175,12 @@ form {
 }
 
 @media screen and (max-width: 490px) {
+
+  .library-heading h1 {
+    font-size: 2rem;
+    font-weight: 300;
+  }
+
   .book-preview {
     display: flex;
     flex-direction: column;
@@ -230,7 +236,7 @@ form {
   display: flex;
   flex-direction: row;
   align-items: center;
-  flex-basis: 70%;
+  flex-basis: 60%;
 }
 
 .addBtn button {
@@ -340,4 +346,9 @@ tr td:last-of-type span {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.7);
+}
+
+.no-books {
+  text-align: center;
+  font-weight: bold;
 }

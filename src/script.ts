@@ -1,3 +1,10 @@
+interface Book {
+   title: string | null;
+   author: string | null;
+   genre: string | null;
+   page: string | null;
+}
+
 class BookRecord<T> {
    constructor(public Books: T[]) {}
    addBookToRecord(book: T): void {
@@ -5,7 +12,7 @@ class BookRecord<T> {
    }
 }
 
-class TemplateDisplay extends BookRecord<Object> {
+class TemplateDisplay extends BookRecord<Book> {
    
    private templateElement: HTMLTemplateElement;
    protected templateContainer: HTMLFormElement;
@@ -72,13 +79,22 @@ class BookPreview extends TemplateDisplay {
       this.getElement<HTMLFormElement>("form", this.templateContainer).addEventListener('submit', (event) => {
          const form = this.templateContainer.querySelector("form")!;
          if(!form.checkValidity()) {
-                 return
+                  return
                }
-               event.preventDefault();
-               this.hostElement.style.display = 'none';
+            event.preventDefault();
                const bookList = new BookList(this);
+               if(this.Books.find((e) => e.title === bookList.BookData.title)) {
+                  console.log('Book already exist');
+                  form.reset();
+                  return
+               }
+
+               
+               this.hostElement.style.display = 'none';
+               
                bookList.showBookList();
                this.Books.push(bookList.BookData);
+               console.log(this.Books)
                form.reset();
       })
    }

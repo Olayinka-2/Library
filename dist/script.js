@@ -57,10 +57,16 @@ class BookPreview extends TemplateDisplay {
                 return;
             }
             event.preventDefault();
-            this.hostElement.style.display = 'none';
             const bookList = new BookList(this);
+            if (this.Books.find((e) => e.title === bookList.BookData.title)) {
+                console.log('Book already exist');
+                form.reset();
+                return;
+            }
+            this.hostElement.style.display = 'none';
             bookList.showBookList();
             this.Books.push(bookList.BookData);
+            console.log(this.Books);
             form.reset();
         });
     }
