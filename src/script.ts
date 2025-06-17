@@ -1,11 +1,19 @@
-class TemplateDisplay {
+class BookRecord<T> {
+   constructor(public Books: T[]) {}
+   addBookToRecord(book: T): void {
+      this.Books.push(book);
+   }
+}
 
+class TemplateDisplay extends BookRecord<Object> {
+   
    private templateElement: HTMLTemplateElement;
    protected templateContainer: HTMLFormElement;
    protected hostElement: HTMLDivElement;
    private AddBookButton: HTMLButtonElement;
 
    constructor() {
+      super([]);
       this.AddBookButton = this.getElement<HTMLButtonElement>('.addBtn');
 
       this.templateElement = this.getElement<HTMLTemplateElement>('#book-input');
@@ -26,16 +34,6 @@ class TemplateDisplay {
             this.hostElement.style.display = 'none';
          }
       });
-
-      this.getElement<HTMLFormElement>("form", this.templateContainer).addEventListener('submit', 
-            (event) => {
-               if(!this.templateContainer.querySelector("form")!.checkValidity()) {
-                 return
-               }
-               event.preventDefault();
-               this.hostElement.style.display = 'none';
-            }
-         )
    }
 
    
@@ -49,8 +47,8 @@ class TemplateDisplay {
 }
 
 class BookPreview extends TemplateDisplay {
-   private inputs: Record<string, HTMLInputElement>;
-   private outputs: Record<string, HTMLElement>;
+   public inputs: Record<string, HTMLInputElement>;
+   public outputs: Record<string, HTMLElement>;
 
    constructor() {
       super();
@@ -63,13 +61,24 @@ class BookPreview extends TemplateDisplay {
       };
 
       this.outputs = {
-         bookTitle: this.getElement<HTMLElement>('.book-title', this.templateContainer),
-         bookAuthor: this.getElement<HTMLElement>('.book-author', this.templateContainer),   
-         bookGenre: this.getElement<HTMLElement>('.book-genre', this.templateContainer),
-         bookPageCount: this.getElement<HTMLElement>('.book-page', this.templateContainer),
+         title: this.getElement<HTMLElement>('.book-title', this.templateContainer),
+         author: this.getElement<HTMLElement>('.book-author', this.templateContainer),   
+         genre: this.getElement<HTMLElement>('.book-genre', this.templateContainer),
+         page: this.getElement<HTMLElement>('.book-page', this.templateContainer),
       };
 
       this.setpInputListeners();
+
+      this.getElement<HTMLFormElement>("form", this.templateContainer).addEventListener('submit', (event) => {
+         if(!this.templateContainer.querySelector("form")!.checkValidity()) {
+                 return
+               }
+               event.preventDefault();
+               this.hostElement.style.display = 'none';
+               const bookList = new BookList(this);
+               bookList.showBookList();
+               this.Books.push(bookList.BookData)
+      })
    }
 
    private setpInputListeners() {
@@ -94,3 +103,43 @@ class BookPreview extends TemplateDisplay {
 }
 
 new BookPreview();
+
+class BookList {
+   constructor(private bookPreview: BookPreview) {
+   }
+
+   get BookData() {
+      return {
+         title: this.bookPreview.outputs.title.textContent,
+         author: this.bookPreview.outputs.author.textContent,
+         genre: this.bookPreview.outputs.genre.textContent,
+         page: this.bookPreview.outputs.page.textContent,
+      };
+   }
+
+   showBookList() {
+      const outputTableData = this.BookData;
+      const tableBody = document.querySelector('#book-list') as HTMLTableSectionElement;
+      if(this.bookPreview.Books.length === 0) { 
+         tableBody.innerHTML = ''; // Clear the table if no books
+      }
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+         <td>
+                     <div class="book-name-item">
+                        <i class="material-icons">book</i>
+                        <p>${outputTableData.title}</p>
+                     </div>
+                  </td>
+                  <td>${outputTableData.author}</td>
+                  <td>${outputTableData.genre}</td>
+                  <td><span>
+                     Available
+                  </span></td>
+      `;
+
+      if(tableBody) {   
+      tableBody.appendChild(newRow);
+      }
+   }
+}

@@ -1,6 +1,15 @@
 "use strict";
-class TemplateDisplay {
+class BookRecord {
+    constructor(Books) {
+        this.Books = Books;
+    }
+    addBookToRecord(book) {
+        this.Books.push(book);
+    }
+}
+class TemplateDisplay extends BookRecord {
     constructor() {
+        super([]);
         this.AddBookButton = this.getElement('.addBtn');
         this.templateElement = this.getElement('#book-input');
         this.hostElement = this.getElement('#My-Modal');
@@ -16,13 +25,6 @@ class TemplateDisplay {
             if (event.target === this.hostElement) {
                 this.hostElement.style.display = 'none';
             }
-        });
-        this.getElement("form", this.templateContainer).addEventListener('submit', (event) => {
-            if (!this.templateContainer.querySelector("form").checkValidity()) {
-                return;
-            }
-            event.preventDefault();
-            this.hostElement.style.display = 'none';
         });
     }
     getElement(selector, parent = document) {
@@ -43,12 +45,22 @@ class BookPreview extends TemplateDisplay {
             page: this.getElement('#Page-count', this.templateContainer),
         };
         this.outputs = {
-            bookTitle: this.getElement('.book-title', this.templateContainer),
-            bookAuthor: this.getElement('.book-author', this.templateContainer),
-            bookGenre: this.getElement('.book-genre', this.templateContainer),
-            bookPageCount: this.getElement('.book-page', this.templateContainer),
+            title: this.getElement('.book-title', this.templateContainer),
+            author: this.getElement('.book-author', this.templateContainer),
+            genre: this.getElement('.book-genre', this.templateContainer),
+            page: this.getElement('.book-page', this.templateContainer),
         };
         this.setpInputListeners();
+        this.getElement("form", this.templateContainer).addEventListener('submit', (event) => {
+            if (!this.templateContainer.querySelector("form").checkValidity()) {
+                return;
+            }
+            event.preventDefault();
+            this.hostElement.style.display = 'none';
+            const bookList = new BookList(this);
+            bookList.showBookList();
+            this.Books.push(bookList.BookData);
+        });
     }
     setpInputListeners() {
         for (const key in this.inputs) {
@@ -69,3 +81,40 @@ class BookPreview extends TemplateDisplay {
     }
 }
 new BookPreview();
+class BookList {
+    constructor(bookPreview) {
+        this.bookPreview = bookPreview;
+    }
+    get BookData() {
+        return {
+            title: this.bookPreview.outputs.title.textContent,
+            author: this.bookPreview.outputs.author.textContent,
+            genre: this.bookPreview.outputs.genre.textContent,
+            page: this.bookPreview.outputs.page.textContent,
+        };
+    }
+    showBookList() {
+        const outputTableData = this.BookData;
+        const tableBody = document.querySelector('#book-list');
+        if (this.bookPreview.Books.length === 0) {
+            tableBody.innerHTML = ''; // Clear the table if no books
+        }
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+         <td>
+                     <div class="book-name-item">
+                        <i class="material-icons">book</i>
+                        <p>${outputTableData.title}</p>
+                     </div>
+                  </td>
+                  <td>${outputTableData.author}</td>
+                  <td>${outputTableData.genre}</td>
+                  <td><span>
+                     Available
+                  </span></td>
+      `;
+        if (tableBody) {
+            tableBody.appendChild(newRow);
+        }
+    }
+}
